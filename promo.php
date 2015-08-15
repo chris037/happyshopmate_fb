@@ -10,7 +10,7 @@ include ('header.php');
 
 	<div data-page="promo" class="content">
 
-			<div class="item-wrap promo">
+			<div class="item-wrap rewards">
 			  <form>
 			    <div>
 			      <h1>Promos</h1>
