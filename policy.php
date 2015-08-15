@@ -1,0 +1,7 @@
+<?php
+
+/*
+	Policy Page
+*/
+
+?>
