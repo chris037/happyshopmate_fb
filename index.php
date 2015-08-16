@@ -9,9 +9,12 @@ include ('header.php');
 	<div data-page="home" class="content">
 
 		<div id="banner-fade">
+
             <ul class="bjqs">
-              <li><img src="images/banner/banner01.jpg"></li>
-              <li><img src="images/banner/banner02.jpg"></li>
+             <?php $happy->get_banners(); ?>
+            
+              <!-- <li><img src="images/banner/banner01.jpg"></li>
+              <li><img src="images/banner/banner02.jpg"></li> -->
             </ul>
          </div>
          
@@ -25,10 +28,10 @@ include ('header.php');
          ?>
          <!--USER-->
          <div class="user-wrap">
-                <img src="images/user.jpg" />
-                <h1><?php echo $happy->get_fullname(); ?></h1>
+                <?php $happy->get_avatar();?>
+                <h1><?= $happy->get_fullname(); ?></h1>
                 <h5>Points Earned</h5>
-                <h3><?php echo $happy->get_user_points_balance($happy->user->s_id); ?></h3>
+                <h3><?= $happy->get_user_points_balance($happy->user->s_id); ?></h3>
                 <div class="clr"></div>
          </div>
          <!--USER END-->

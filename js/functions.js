@@ -1,15 +1,24 @@
 function init() {
    
 
-  var page = $('.content').data('page');
-
+  $( ".entry:odd" ).addClass('no-border');
   $(".scroll-pane").jScrollPane();
 
   $('#banner-fade').bjqs({
-      height      : 507,
-      width       : 780,
-      responsive  : true
+    height      : 507,
+    width       : 780,
+    responsive  : true
   });
+  
+  var page = $('.content').data('page');
+
+  switch(page){
+    case 'accounts':
+
+       $('#changeModal').modal('hide');
+       $('#editModal').modal('hide');
+       break;
+  }
 
 }
 

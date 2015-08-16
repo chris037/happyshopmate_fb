@@ -162,6 +162,7 @@
 		-webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.39);
 		-moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.39);
 		box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.39);
+		width: 103px;
 		}
 		
 /**USER END**/	
@@ -563,6 +564,7 @@
 		float:left;
 		margin-right:15px;
 		border-radius:5px;
+		width: 103px;
 		}
 	.account h2{
 		font-weight:bold;
@@ -1045,7 +1047,9 @@ p.bjqs-caption{display:block;width:96%;margin:0;padding:2%;position:absolute;bot
 }
 /**DROPDOWN MENU END**/
 
-.modal-content:focus, .modal-dialog:focus, .modal-open .modal,.btn:focus{outline:none !important;}
+:focus, .modal-content:focus, .modal-dialog:focus, .modal-open .modal,.btn:focus{
+	outline:none !important;
+}
 
 
 

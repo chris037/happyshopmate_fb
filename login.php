@@ -4,7 +4,6 @@ session_start();
 include 'config.php';
 include 'functions.php';
 include 'myHappy.class.php';
-
 $happy = new myHappy();
 
 

@@ -1,5 +1,6 @@
 <?php
 
+header('Location: points.php');
 /*
 	Promo Page
 */
