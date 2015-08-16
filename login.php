@@ -1,3 +1,29 @@
+<?php
+session_start();
+
+include 'config.php';
+include 'functions.php';
+include 'myHappy.class.php';
+
+$happy = new myHappy();
+
+
+if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+ 
+  $mobile   = $_POST['mobile_no'];
+  $password = $_POST['password'];
+
+  if ( $happy->validate_user_creds($mobile, $password) ) {
+       $_SESSION['user'] = $happy->user;
+       header("Location: index.php");
+  } else {
+      header("Location: register.php");
+  }
+  
+}
+
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -15,11 +41,11 @@
     	<img  class="bottle" src="images/cokeBottle.jpg" />
         <div class="login-form">
         	<img src="images/shopmateLogo.jpg" />
-        	<form>
+        	<form action="login.php" method="post">
             	<button class="loginFb"></button>
                 <label>OR</label>
-                <input type="email" name="email"  placeholder="Email Address"/>
-                <input type="password" name="password"  placeholder="Password"/>
+                <input type="mobile" name="mobile_no"  class="validate[required,custom[phone],minSize[8],maxSize[18]]" placeholder="Mobile Number" required/>
+                <input type="password" name="password"  placeholder="Password" required/>
                 <input type="submit" value="Sign in" />
                 <a href="#" data-toggle="modal" data-target="#myModal2">Forgot Password?</a>
                 <a href="#" data-toggle="modal" data-target="#myModal">Register</a>

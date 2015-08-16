@@ -43,13 +43,13 @@
 					margin:10px 0;
 					font-size:14px;
 					}
-				.login-form input[type="email"],.login-form input[type="password"],.login-form input[type="submit"]{
+				.login-form input[type="mobile"],.login-form input[type="password"],.login-form input[type="submit"]{
 					border:none;
 					border-radius: 5px;
 					line-height: 1.33333;
 					margin-bottom: 10px;
 					}
-				.login-form input[type="email"],.login-form input[type="password"]{
+				.login-form input[type="mobile"],.login-form input[type="password"]{
 					height: 30px;
 					padding: 10px 16px;
 					width: 296px;

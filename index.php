@@ -1,8 +1,6 @@
 <?php
 
-/*
-	Home Page
-*/
+
 
 include ('header.php');
 
@@ -20,13 +18,17 @@ include ('header.php');
          <!--BANNER BOTTOM-->
          <div class="bottom-shadow"></div>
          <!--BANNER BOTTOM END-->
-         
+         <?php
+            //   echo "<pre>";
+            // print_r($happy->user);
+            // echo "</pre>";  
+         ?>
          <!--USER-->
          <div class="user-wrap">
                 <img src="images/user.jpg" />
-                <h1>Juan Dela Cruz</h1>
+                <h1><?php echo $happy->get_fullname(); ?></h1>
                 <h5>Points Earned</h5>
-                <h3>358,989 pts</h3>
+                <h3><?php echo $happy->get_user_points_balance($happy->user->s_id); ?></h3>
                 <div class="clr"></div>
          </div>
          <!--USER END-->

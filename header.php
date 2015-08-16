@@ -1,7 +1,20 @@
 <?php
 
+
+session_start();
+include 'config.php';
+include 'functions.php';
+include 'myHappy.class.php';
+$happy = new myHappy();
+
+if ( !is_logged_in() ) {
+    header('location: login.php');
+    die();
+}else{
+    $happy->user = $_SESSION['user'];
+}
 /*
-	Header Module
+    Home Page
 */
 
 ?>
@@ -15,6 +28,7 @@
 <link rel="stylesheet" href="css/style.css" />
 <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="css/jquery.jscrollpane.css" />
+<link rel="stylesheet" href="css/validationEngine.jquery.css" />
 
 <title>Coca-Cola Happy Shopmate</title>
 </head>

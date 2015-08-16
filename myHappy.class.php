@@ -11,99 +11,95 @@
 			|
 			|**************************************************************************************************/
 
+			require_once 'Unirest.php';
 
-			//error_reporting( E_ALL );
-			//ini_set( 'display_errors', '1' );
-
-			
-
-
-			/*
-			
-			Login
-
-			loginFB();
-			login(username, password, facebook);
-						
-			register();
-			forgotpassword();
-
-			myUser Class
-
-			loadBanner()
-
-
-			
-			loadProfile()
-				$user->name
-				$user->avatar
-				$user->point
-
-
-			processCode(string)
-			*uploadCode()
-
-			processReceipt(img)
-			*uploadReceipt
+			error_reporting( E_ALL );
+			ini_set( 'display_errors', '1' );
 
 			
 
-
-
-			*/
 
 			class myHappy
 			{
-			     private $url;
-			     private $method = "GET";
+			     private $apiurl = "https://test-shopmate.coca-cola.com.ph/v1/";
+			     private $method = "POST";
+			     public $user;
+			     public $errormessage;
 			    
 
 			     // constructor
 			     public function __construct(){}
 
-			     // make curl call
-			     private function request_curl()
+			     // make api call
+			     private function request_api($url, $params = null, $method = "POST")
 			     {
-			          
+			     	$headers = array('WWW-Authenticate'=>'Digest realm="Coke HappyShopmate API", qop="auth", nonce="55cd2537a5d12", opaque="0001f3dc5fa50faae139d56f4b53b013"');
+	
+			        Unirest\Request::auth('admin', '12345', CURLAUTH_DIGEST);
+					if($method == "POST"){
+						$response =  Unirest\Request::post($this->apiurl.$url, $headers, $params); 
+					}else{
+						$response =  Unirest\Request::get($this->apiurl.$url, $headers, $params);
+					}	
+					
+	
+					return $response->body->result;
 			     }
 
 
-			     // make params for url
-			     private function makeParams()
-			     {
-			          if ( isset( $this->request['params'] ) && is_array( $this->request['params'] ) && count( $this->request['params'] ) >= 1 ) {
-			               foreach ( $this->request['params'] as $k => $v ) {
-			                    $separator = strstr( $this->url, '?' ) ? '&' : '?';
-			                    $this->url .= $separator . urlencode( $k ) . "=" . urlencode( $v );
-			               }
-			          }
-			          return $this->url;
-			     }
-
+			     
 			    
 
 			     /********************/
 			     /* PUBLIC FUNCTIONS */
 			     /********************/
+			    public function get_fullname(){
+			    	return $this->user->s_fname . " " . $this->user->s_lname;
+			    }
 
-			     // get headers
-			     public function getHeaders()
-			     {
-			          return isset( $this->response['headers'] ) ? $this->response['headers'] : false;
-			     }
+			    public function get_avatar(){
 
+			   //  		$headers = array('WWW-Authenticate'=>'Digest realm="Coke HappyShopmate API", qop="auth", nonce="55cd2537a5d12", opaque="0001f3dc5fa50faae139d56f4b53b013"');
+	
+				  //       Unirest\Request::auth('admin', '12345', CURLAUTH_DIGEST);
+						// $response = Unirest\Request::get("https://test-shopmate.coca-cola.com.ph/v1/img/profile/". $this->user->s_id, $headers, $params=null);		    
+
+						// $data = $response;
+
+						// $data = pack('H*',$data);
+
+						// $im = imagecreatefromstring($data);
+
+						// echo imagejpeg($im);
+
+			    		//return $this->request_api('img/profile/'. $this->user->s_id, null, "GET");
+			     
+			    }
+				public function validate_user_creds($mobile, $password) {
+					
+					
+					$params = array("mobile_no" => $mobile, "password" => $password);
+					//$params = array("mobile_no" => '09165533692', "password" => 'password');					
+					$result = $this->request_api('shoppers/login', $params);
+
+					if(!isset($result->status)){
+						$this->user = $result;		
+						return 	true;
+					}else{
+						return false;
+					}
+				
+				}
+
+				public function get_user_points_balance(){
+
+					
+					return $this->request_api('shoppers/points/'. $this->user->s_id, null, "GET");
+
+		
+				}
 			    
 
-			     // quick request
-			     public static function quick( $url = null, $method = 'get', $parser = '' )
-			     {
-			          if ( is_string( $url ) ) {
-			               $quick = new myRest();
-			               $data = $quick->request( $url, $method, $parser );
-			               $quick->reset();
-			               return $data;
-			          }
-			          return false;
-			     }
+			     
 
 			}
